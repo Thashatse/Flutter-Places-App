@@ -28,6 +28,12 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Places require access to your gallery to get images of the great places you visit. These images will be stored on your device and will not be uploaded anywhere.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Places require access to your camera to take images of the great places you visit. These images will be stored on your device and will not be uploaded anywhere.</string>
+	<key>NSMicrophoneUsageDescription </key>
+	<string>Places require access to your microphone to take videos of the great places you visit. These videos will be stored on your device and will not be uploaded anywhere.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
