@@ -21,30 +21,40 @@ class PlacesListScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Consumer<GreatPlaces>(
-        child: const Padding(
-          padding: EdgeInsets.all(25),
-          child: Center(
-            child: Text('No place yet :('),
-          ),
-        ),
-        builder: (context, greatPlaces, child) => greatPlaces.items.isEmpty
-            ? child!
-            : ListView.builder(
-                itemCount: greatPlaces.items.length,
-                itemBuilder: ((context, index) {
-                  final item = greatPlaces.items[index];
-                  return ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: FileImage(item.image),
+      body: FutureBuilder(
+        future: Provider.of<GreatPlaces>(context, listen: false)
+            .fetchAndSetPlaces(),
+        builder: (context, snapshot) =>
+            snapshot.connectionState == ConnectionState.waiting
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Consumer<GreatPlaces>(
+                    child: const Padding(
+                      padding: EdgeInsets.all(25),
+                      child: Center(
+                        child: Text('No place yet :('),
+                      ),
                     ),
-                    title: Text(item.title),
-                    onTap: (() {
-                      //go te detail screen
-                    }),
-                  );
-                }),
-              ),
+                    builder: (context, greatPlaces, child) =>
+                        greatPlaces.items.isEmpty
+                            ? child!
+                            : ListView.builder(
+                                itemCount: greatPlaces.items.length,
+                                itemBuilder: ((context, index) {
+                                  final item = greatPlaces.items[index];
+                                  return ListTile(
+                                    leading: CircleAvatar(
+                                      backgroundImage: FileImage(item.image),
+                                    ),
+                                    title: Text(item.title),
+                                    onTap: (() {
+                                      //go te detail screen
+                                    }),
+                                  );
+                                }),
+                              ),
+                  ),
       ),
     );
   }
